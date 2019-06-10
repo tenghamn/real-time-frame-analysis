@@ -171,11 +171,6 @@ Please use MATLAB Programming Style Guidelines:
 
 http://www.datatool.com/downloads/matlab_style_guidelines.pdf
 
-## Icons
-
-To keep style consistent please use icons from:
-
-https://www.glyphicons.com/sets/basic/
 
 ## Colors
 
