@@ -2,27 +2,6 @@
 
 A matlab software for controlling andor cameras.
 
-## Code style
-
-Please use MATLAB Programming Style Guidelines:
-
-http://www.datatool.com/downloads/matlab_style_guidelines.pdf
-
-## Icons
-
-To keep style consistent please use icons from:
-
-https://www.glyphicons.com/sets/basic/
-
-## Colors
-
-Background color: #fbe8a6
-
-Buttons: #303c6c
-
-Text: #d2fdff
-
-
 ## Usage
 
 ### Creating your own specific plotter
@@ -31,9 +10,7 @@ In the software there is a possibility to plot whatever you want. This is done b
 directory. There two types of plotters, single axis plotter and triple axis plotter. The single axis plotters allows you to plot on the one axis
 in the Single Axis Plotter panel and the triple axis plotter allows you to plot on the three axes in the Triple Axis Plotter panel.
 
-![alt text][logo]
-
-[logo]: https://gitlab.com/comp-surf-sci/andor-camera/raw/master/assets/main_page.png
+![alt text](https://github.com/tenghamn/real-time-frame-analysis/raw/master/assets/main_page.png)
 
 The plotter classes needs to follow a certain pattern to work.
 1. It needs to inherit the LiveAnalyzer class
@@ -188,3 +165,23 @@ There are three different types of regions, ''signal'', ''reference'' and ''back
 
 To create your own live analysis create a matlab class called CustomLiveAnalyzer and let it inherit from LiveAnalyzer. 
 
+## Code style
+
+Please use MATLAB Programming Style Guidelines:
+
+http://www.datatool.com/downloads/matlab_style_guidelines.pdf
+
+
+## Colors
+For figures:<br/>
+BackgroundColor: [1.0,1.0,1.0] <br/>
+ForegroundColor: [0.00,0.45,0.74]<br/>
+<br/>
+For settings:<br/>
+BackgroundColor: [0.94,0.94,0.94]<br/>
+ForegroundColor: [0.00,0.45,0.74]<br/>
+<br/>
+Buttons:<br/>
+BackgroundColor: [0.00,0.45,0.74]<br/>
+FontColor: [1.0,1.0,1.0]<br/>
+<br/>
