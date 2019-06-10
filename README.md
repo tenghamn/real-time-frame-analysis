@@ -173,9 +173,14 @@ http://www.datatool.com/downloads/matlab_style_guidelines.pdf
 
 
 ## Colors
+For figures:
+BackgroundColor: [1.0,1.0,1.0]
+ForegroundColor: [0.00,0.45,0.74]
 
-Background color: #fbe8a6
+For settings:
+BackgroundColor: [0.94,0.94,0.94]
+ForegroundColor: [0.00,0.45,0.74]
 
-Buttons: #303c6c
-
-Text: #d2fdff
+Buttons: 
+BackgroundColor: [0.00,0.45,0.74]
+FontColor: [1.0,1.0,1.0]
