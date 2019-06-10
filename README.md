@@ -1,6 +1,6 @@
-# andor-camera
+# A matlab software for andor cameras
 
-A matlab software for controlling andor cameras.
+Works with Zyla, iXon and Newton. You need to provide an andor sdk for it to work.
 
 ## Usage
 
