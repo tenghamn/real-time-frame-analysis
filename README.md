@@ -3,7 +3,13 @@
 Recording software for Andor cameras with the possibility of implementing analysis in real time.
 Works with Zyla, iXon and Newton. You need to provide an Andor sdk for it to work.
 
+![alt text](https://github.com/tenghamn/real-time-frame-analysis/raw/master/assets/main_page.png)
+
 # Usage
+
+## Settings
+
+To change camera settings, such as exposure time, number of accumulations and area of interest go to the camera settings tab.
 
 ## Implement your own analysis
 
