@@ -11,6 +11,8 @@ Works with Zyla, iXon and Newton. You need to provide an Andor sdk for it to wor
 
 To change camera settings, such as exposure time, number of accumulations and area of interest go to the camera settings tab.
 
+![alt text](https://github.com/tenghamn/real-time-frame-analysis/raw/master/assets/zyla_settings.png)
+
 ## Implement your own analysis
 
 In the software there is a possibility to plot whatever you want. This is done by writing "plotter" classes and store them in a folder called plotters in the matlab working directory. There two types of plotters, single axis plotter and triple axis plotter. The single axis plotters allows you to plot on the one axis in the Single Axis Plotter panel and the Triple axis plotter allows you to plot on the three axes in the Triple Axis Plotter shown in the figure below.
