@@ -220,3 +220,7 @@ Buttons:<br/>
 BackgroundColor: [0.00,0.45,0.74]<br/>
 FontColor: [1.0,1.0,1.0]<br/>
 <br/>
+
+# License
+
+[MIT](https://github.com/tenghamn/real-time-frame-analysis/blob/master/LICENSE.txt)
