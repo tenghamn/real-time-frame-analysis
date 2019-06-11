@@ -1,14 +1,13 @@
-# A matlab software for andor cameras
+# A camera software for real time frame analysis
 
-Works with Zyla, iXon and Newton. You need to provide an andor sdk for it to work.
+Recording software for Andor cameras with the possibility of implementing analysis in real time.
+Works with Zyla, iXon and Newton. You need to provide an Andor sdk for it to work.
 
 ## Usage
 
-### Creating your own specific plotter
+### Implement your own analysis
 
-In the software there is a possibility to plot whatever you want. This is done by creating "plotter" classes and putting them in a folder called plotters in the working 
-directory. There two types of plotters, single axis plotter and triple axis plotter. The single axis plotters allows you to plot on the one axis
-in the Single Axis Plotter panel and the triple axis plotter allows you to plot on the three axes in the Triple Axis Plotter panel.
+In the software there is a possibility to plot whatever you want. This is done by writing "plotter" classes and store them in a folder called plotters in the matlab working directory. There two types of plotters, single axis plotter and triple axis plotter. The single axis plotters allows you to plot on the one axis in the Single Axis Plotter panel and the Triple axis plotter allows you to plot on the three axes in the Triple Axis Plotter panel as shown in the figure below.
 
 ![alt text](https://github.com/tenghamn/real-time-frame-analysis/raw/master/assets/main_page.png)
 
@@ -153,17 +152,13 @@ you can use one of the templates below.
     end
     ```
 
-### Setting up sensing regions
+### Sensing regions
 
 To setup sensing regions go to the settings tab. 
 
 In the settings tab one can define sensing regions. With these regions you will be able choose what data will be saved and you can perform some live analysis using these regions. 
 
 There are three different types of regions, ''signal'', ''reference'' and ''background''. One can add a new region by choosing ''Add region'' in the select region dropdown. This will create a ''signal'' region in the center of the camera view. Using the spinners below you can choose the size and position of these. 
-
-### Create your own live analysis
-
-To create your own live analysis create a matlab class called CustomLiveAnalyzer and let it inherit from LiveAnalyzer. 
 
 ## Code style
 
