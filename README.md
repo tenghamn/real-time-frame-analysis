@@ -87,7 +87,7 @@ you can use one of the templates below.
         end
     end
     ```
-2. Triplpe axis plotter
+2. Triple axis plotter
     ```matlab
     classdef TemplateTripleAxis<LiveAnalyzer
         properties(Constant)
