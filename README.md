@@ -3,11 +3,12 @@
 Recording software for Andor cameras with the possibility of implementing analysis in real time.
 Works with Zyla, iXon and Newton. You need to provide an Andor sdk for it to work.
 
-## Usage
+# Usage
 
-### Implement your own analysis
+## Implement your own analysis
 
-In the software there is a possibility to plot whatever you want. This is done by writing "plotter" classes and store them in a folder called plotters in the matlab working directory. There two types of plotters, single axis plotter and triple axis plotter. The single axis plotters allows you to plot on the one axis in the Single Axis Plotter panel and the Triple axis plotter allows you to plot on the three axes in the Triple Axis Plotter panel as shown in the figure below.
+In the software there is a possibility to plot whatever you want. This is done by writing "plotter" classes and store them in a folder called plotters in the matlab working directory. There two types of plotters, single axis plotter and triple axis plotter. The single axis plotters allows you to plot on the one axis in the Single Axis Plotter panel and the Triple axis plotter allows you to plot on the three axes in the Triple Axis Plotter shown in the figure below.
+When you have provided a plotter class you can use it by choosing it in the plot function dropdown.
 
 ![alt text](https://github.com/tenghamn/real-time-frame-analysis/raw/master/assets/main_page.png)
 
@@ -152,15 +153,46 @@ you can use one of the templates below.
     end
     ```
 
-### Sensing regions
+## Sensing regions
 
-To setup sensing regions go to the settings tab. 
+There is a possibility to add define sensing regions of the camera view. This can be done under the settings tab of the software. To add a region go to the dropdown and choose 'add region'. Define the size of the region by changing the values in the spinner boxes below.
 
-In the settings tab one can define sensing regions. With these regions you will be able choose what data will be saved and you can perform some live analysis using these regions. 
+![alt text](https://github.com/tenghamn/real-time-frame-analysis/raw/master/assets/sensing_regions.png)
 
-There are three different types of regions, ''signal'', ''reference'' and ''background''. One can add a new region by choosing ''Add region'' in the select region dropdown. This will create a ''signal'' region in the center of the camera view. Using the spinners below you can choose the size and position of these. 
+### Signal, background and reference regions
 
-## Code style
+For convenience there is a possibility of defining the regions as a signal (default), background or reference region. 
+
+This is done by checking the 'Is reference region' or 'Is background region' checkboxes. The regions will then be added in the listboxes in the bottom of the view. These regions can then be associated with the signal regions by clicking on them in the listboxes.
+
+### Use the sensing regions in the plotters
+
+In the plotter classes you can access the defined sensing regions by.
+```matlab
+obj.SensingRegions
+```
+To get the names of the regions use one of
+```matlab
+regionNames = obj.SensingRegions.namesOfAllRegions
+signalNames = obj.SensingRegions.namesOfSignalRegions
+referenceNames = obj.SensingRegions.namesOfReferenceRegions
+backgroundNames = obj.SensingRegions.namesOfBackgroundRegions
+```
+To get the associations between regions one can use
+```matlab
+signalName = obj.SensingRegions.namesOfSignalRegions{1}
+namesOfAssociatedReferenceRegions = obj.SensingRegions.getNamesOfAssociatedReferenceRegions(signalName)
+namesOfAssociatedBackgroundRegions = obj.SensingRegions.getNamesOfAssociatedBackgroundRegions(signalName)
+```
+To plot a region one can use
+```matlab
+regionName = obj.SensingRegions.namesOfAllRegions{1};
+region = obj.SensingRegions.getRegion(regionName);
+data = region.getDataInRegion(obj.currentFrame)
+image(axis,data,'CDataMapping','scaled');
+```
+
+# Code style
 
 Please use MATLAB Programming Style Guidelines:
 
