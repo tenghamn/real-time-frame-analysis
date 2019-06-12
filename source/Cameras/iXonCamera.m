@@ -2,6 +2,11 @@ classdef iXonCamera<handle
     
     properties
         
+        % Sensor properties
+        sensorWidth
+        sensorHeight
+        sensorCoordinates
+        
         % Image properties (read only)
         imageHeight
         imageWidth
@@ -96,6 +101,22 @@ classdef iXonCamera<handle
             info = [info{:}];
         end
         
+        function width = get.sensorWidth(obj)
+            width = obj.imageMaxWidth;
+        end
+        
+        function height = get.sensorHeight(obj)
+            height = obj.imageMaxHeight;
+        end
+        
+        function coordinates = get.sensorCoordinates(obj)
+            coordinates = [
+               [1,1];
+               [1+obj.sensorWidth,1];
+               [1+obj.sensorWidth,1+obj.sensorHeight];
+               [1,1+obj.sensorHeight]
+               ];
+        end
         
         function latency = get.latency(obj)
             latency = obj.acquisitionProgress.series - obj.numberOfAcquiredFrames;

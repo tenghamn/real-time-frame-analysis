@@ -1,8 +1,8 @@
 addpath('../source/Cameras')
 
 %camera = CameraSimulator();
-camera = ZylaCamera();
-%camera = iXonCamera();
+%camera = ZylaCamera();
+camera = iXonCamera();
 %camera = NewtonCamera();
 
 % Test initial sizes, camera image size should be same as sensor size
