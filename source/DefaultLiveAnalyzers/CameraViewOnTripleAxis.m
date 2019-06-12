@@ -14,8 +14,8 @@ classdef CameraViewOnTripleAxis<LiveAnalyzer
             cla(miniAxisLeft);
             cla(miniAxisBottom);
             
-            set(mainAxis,'xlim', [1,size(obj.currentFrame,1)]);
-            set(mainAxis,'ylim', [1,size(obj.currentFrame,2)]);
+            set(mainAxis,'xlim', [1,size(obj.currentFrame,2)]);
+            set(mainAxis,'ylim', [1,size(obj.currentFrame,1)]);
             set(mainAxis,'zlimMode', 'auto');
             
             xlimits = get(mainAxis,'xlim');

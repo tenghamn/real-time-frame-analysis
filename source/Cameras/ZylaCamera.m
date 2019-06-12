@@ -118,7 +118,7 @@ classdef ZylaCamera<handle
             if isinteger(width) && isinteger(height) && isinteger(leftPosition) && isinteger(topPosition)
                 try
                     obj.setMaxAreaOfInterest();
-                    setAreaOfInterest(obj,width,height,leftPosition,topPosition)
+                    setAreaOfInterest(obj,height,width,topPosition,leftPosition)
                 catch
                 end
             end
@@ -172,7 +172,7 @@ classdef ZylaCamera<handle
                 [rc,buf] = AT_WaitBuffer(obj.cameraHandle,10000);
                 AT_CheckWarning(rc);
                 AT_CheckError(rc);
-                [rc,frame] = AT_ConvertMono32ToMatrix(buf,obj.imageHeightFast,obj.imageWidthFast,obj.imageStrideFast);
+                [rc,frame] = AT_ConvertMono32ToMatrix(buf,obj.imageWidthFast,obj.imageHeightFast,obj.imageStrideFast);
                 AT_CheckWarning(rc);
                 [rc] = AT_QueueBuffer(obj.cameraHandle,obj.imageSizeFast);
                 AT_CheckWarning(rc);
@@ -237,20 +237,20 @@ classdef ZylaCamera<handle
             obj.clockFrequencyFast = obj.clockFrequency;
         end
         
-        function setAreaOfInterest(obj,width,height,leftPosition,topPosition)
+        function setAreaOfInterest(obj,height,width,topPosition,leftPosition)
             if obj.isAcquiring
                 obj.stopAcquisition()
                 wasAcquiring = true;
             else
                 wasAcquiring = false;
             end
-            rc = AT_SetInt(obj.cameraHandle, 'AOIWidth', width);
+            rc = AT_SetInt(obj.cameraHandle, 'AOIWidth', height);
             AT_CheckWarning(rc);
-            rc = AT_SetInt(obj.cameraHandle, 'AOIHeight', height);
+            rc = AT_SetInt(obj.cameraHandle, 'AOIHeight', width);
             AT_CheckWarning(rc);
-            rc = AT_SetInt(obj.cameraHandle, 'AOILeft', leftPosition);
+            rc = AT_SetInt(obj.cameraHandle, 'AOILeft', topPosition);
             AT_CheckWarning(rc);
-            rc = AT_SetInt(obj.cameraHandle, 'AOITop', topPosition);
+            rc = AT_SetInt(obj.cameraHandle, 'AOITop', leftPosition);
             AT_CheckWarning(rc);
             if wasAcquiring
                 obj.startAcquisition();
@@ -258,7 +258,7 @@ classdef ZylaCamera<handle
         end
         
         function setMaxAreaOfInterest(obj)
-            obj.setAreaOfInterest(obj.imageMaxWidth,obj.imageMaxHeight,1,1);
+            obj.setAreaOfInterest(obj.imageMaxHeight,obj.imageMaxWidth,1,1);
         end
         
         function width = get.sensorWidth(obj)
@@ -594,7 +594,7 @@ classdef ZylaCamera<handle
         end
         
         function binning = get.horisontalBinning(obj)
-            [rc,binning] = AT_GetInt(obj.cameraHandle,'AOIHBin');
+            [rc,binning] = AT_GetInt(obj.cameraHandle,'AOIVBin');
             AT_CheckWarning(rc);
         end
         
@@ -605,7 +605,7 @@ classdef ZylaCamera<handle
             else
                 wasAcquiring = false;
             end
-            [rc] = AT_SetInt(obj.cameraHandle,'AOIHBin',binning);
+            [rc] = AT_SetInt(obj.cameraHandle,'AOIVBin',binning);
             AT_CheckWarning(rc);
             if wasAcquiring
                 obj.startAcquisition();
@@ -613,7 +613,7 @@ classdef ZylaCamera<handle
         end
         
         function binning = get.verticalBinning(obj)
-            [rc,binning] = AT_GetInt(obj.cameraHandle,'AOIVBin');
+            [rc,binning] = AT_GetInt(obj.cameraHandle,'AOIHBin');
             AT_CheckWarning(rc);
         end
         
@@ -624,7 +624,7 @@ classdef ZylaCamera<handle
             else
                 wasAcquiring = false;
             end
-            [rc] = AT_SetInt(obj.cameraHandle,'AOIVBin',binning);
+            [rc] = AT_SetInt(obj.cameraHandle,'AOIHBin',binning);
             AT_CheckWarning(rc);
             if wasAcquiring
                 obj.startAcquisition();
@@ -661,32 +661,32 @@ classdef ZylaCamera<handle
         end
         
         function height = get.imageHeight(obj)
-            [rc,height] = AT_GetInt(obj.cameraHandle,'AOIHeight');
+            [rc,height] = AT_GetInt(obj.cameraHandle,'AOIWidth');
             AT_CheckWarning(rc);
         end
         
         function width = get.imageWidth(obj)
-            [rc,width] = AT_GetInt(obj.cameraHandle,'AOIWidth');
+            [rc,width] = AT_GetInt(obj.cameraHandle,'AOIHeight');
             AT_CheckWarning(rc);
         end
         
         function height = get.imageMaxHeight(obj)
-            [rc,height] = AT_GetIntMax(obj.cameraHandle,'AOIHeight');
+            [rc,height] = AT_GetIntMax(obj.cameraHandle,'AOIWidth');
             AT_CheckWarning(rc);
         end
         
         function width = get.imageMaxWidth(obj)
-            [rc,width] = AT_GetIntMax(obj.cameraHandle,'AOIWidth');
+            [rc,width] = AT_GetIntMax(obj.cameraHandle,'AOIHeight');
             AT_CheckWarning(rc);
         end
         
         function height = get.imageTopPosition(obj)
-            [rc,height] = AT_GetInt(obj.cameraHandle,'AOITop');
+            [rc,height] = AT_GetInt(obj.cameraHandle,'AOILeft');
             AT_CheckWarning(rc);
         end
         
         function width = get.imageLeftPosition(obj)
-            [rc,width] = AT_GetInt(obj.cameraHandle,'AOILeft');
+            [rc,width] = AT_GetInt(obj.cameraHandle,'AOITop');
             AT_CheckWarning(rc);
         end
         
