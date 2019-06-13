@@ -224,3 +224,7 @@ FontColor: [1.0,1.0,1.0]<br/>
 # License
 
 [MIT](https://github.com/tenghamn/real-time-frame-analysis/blob/master/LICENSE.txt)
+
+# Developed at
+
+![alt text](https://github.com/tenghamn/real-time-frame-analysis/raw/master/assets/AvancezChalmersU_black_right.png)
