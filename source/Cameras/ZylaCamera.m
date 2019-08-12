@@ -56,6 +56,7 @@ classdef ZylaCamera<handle
         softwareTrigger
         stoppingAcquisition
         computerTime
+        sensorReadoutMode 
         
         % Camera info
         cameraInfo
@@ -70,6 +71,7 @@ classdef ZylaCamera<handle
         ALLOWED_SIMPLE_PRE_AMP_GAIN_CONTROLS = {'16-bit (low noise & high well capacity)','12-bit (low noise)','12-bit (high well capacity)'};
         ALLOWED_PIXEL_ENCODINGS = {'Mono12','Mono12Packed','Mono16','Mono32'};
         ALLOWED_ELECTRONIC_SHUTTERING_MODES = {'Global', 'Rolling'};
+        ALLOWED_SENSOR_READOUT_MODES = {'Bottom Up Sequential', 'Bottom Up Simultaneous','Centre Out Simultaneous','Outside In Simultaneous','Top Down Sequential','Top Down Simultaneous'}
     end
     
     methods
@@ -98,7 +100,8 @@ classdef ZylaCamera<handle
                 compose('pixelEncoding:\t%s\n',obj.pixelEncoding),...
                 compose('fanSpeed:\t%s\n',obj.fanSpeed),...
                 compose('electronicShutteringMode:\t%s\n',obj.electronicShutteringMode),...
-                compose('fastAOIFrameRateEnable:\t%d',obj.fastAOIFrameRateEnable),...
+                compose('fastAOIFrameRateEnable:\t%d\n',obj.fastAOIFrameRateEnable),...
+                compose('frameRate:\t%f',obj.frameRate),...
                 ];
             info = [info{:}];
         end
@@ -176,7 +179,6 @@ classdef ZylaCamera<handle
                 AT_CheckWarning(rc);
                 [rc] = AT_QueueBuffer(obj.cameraHandle,obj.imageSizeFast);
                 AT_CheckWarning(rc);
-
                 %Get timestamp and convert it into seconds
                 [rc,ticks] = AT_GetTimeStamp(buf,obj.imageSizeFast);
                 time = double(ticks)/double(obj.clockFrequencyFast);
@@ -220,9 +222,9 @@ classdef ZylaCamera<handle
                 
                 [rc] = AT_Command(obj.cameraHandle, 'TimestampClockReset');
                 AT_CheckWarning(rc);
-                
-                [rc] = AT_Command(obj.cameraHandle,'AcquisitionStart');
                 obj.queueBuffer();
+                [rc] = AT_Command(obj.cameraHandle,'AcquisitionStart');
+                
 %                 AT_CheckWarning(rc);
 %                 [rc] = AT_Command(obj.cameraHandle, 'TimestampClockReset');
                 AT_CheckWarning(rc);
@@ -255,6 +257,43 @@ classdef ZylaCamera<handle
             if wasAcquiring
                 obj.startAcquisition();
             end
+        end
+        
+        function set.sensorReadoutMode(obj,mode)
+            if obj.isAcquiring
+                obj.stopAcquisition()
+                wasAcquiring = true;
+            else
+                wasAcquiring = false;
+            end
+            if isequal(mode,obj.ALLOWED_SENSOR_READOUT_MODES{1})
+                [rc] = AT_SetEnumString(obj.cameraHandle,'SensorReadoutMode',mode);
+                AT_CheckWarning(rc);
+            elseif isequal(mode,obj.ALLOWED_SENSOR_READOUT_MODES{2})
+                [rc] = AT_SetEnumString(obj.cameraHandle,'SensorReadoutMode',mode);
+                AT_CheckWarning(rc);
+            elseif isequal(mode,obj.ALLOWED_SENSOR_READOUT_MODES{3})
+                [rc] = AT_SetEnumString(obj.cameraHandle,'SensorReadoutMode',mode);
+                AT_CheckWarning(rc);
+            elseif isequal(mode,obj.ALLOWED_SENSOR_READOUT_MODES{4})
+                [rc] = AT_SetEnumString(obj.cameraHandle,'SensorReadoutMode',mode);
+                AT_CheckWarning(rc);
+            elseif isequal(mode,obj.ALLOWED_SENSOR_READOUT_MODES{5})
+                [rc] = AT_SetEnumString(obj.cameraHandle,'SensorReadoutMode',mode);
+                AT_CheckWarning(rc);
+            elseif isequal(mode,obj.ALLOWED_SENSOR_READOUT_MODES{6})
+                [rc] = AT_SetEnumString(obj.cameraHandle,'SensorReadoutMode',mode);
+                AT_CheckWarning(rc);
+            end
+            if wasAcquiring
+                obj.startAcquisition();
+            end
+        end
+        
+        function mode = get.sensorReadoutMode(obj)
+            [rc,index] = AT_GetEnumIndex(obj.cameraHandle,'SensorReadoutMode');
+            [rc,mode] =  AT_GetEnumStringByIndex(obj.cameraHandle,'SensorReadoutMode',index,100);
+            AT_CheckWarning(rc);
         end
         
         function setMaxAreaOfInterest(obj)
