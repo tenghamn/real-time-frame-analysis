@@ -177,7 +177,7 @@ classdef NewtonCamera<handle
                         [ret, frame] = GetOldestImage(obj.imageSizeFast);
                         CheckWarning(ret);
                     end
-                    frame=frame + flipdim(transpose(reshape(imageData, obj.imageHeightFast, obj.imageWidthFast)),1);
+                    frame=frame + reshape(imageData, obj.imageWidthFast, obj.imageHeight);
                     obj.numberOfAcquiredFrames = obj.numberOfAcquiredFrames + 1;
                 end
             else
@@ -191,7 +191,7 @@ classdef NewtonCamera<handle
                         [ret, frame] = GetOldestImage(obj.imageSizeFast);
                         CheckWarning(ret);
                     end
-                    frame=frame + flipdim(transpose(reshape(imageData, obj.imageHeightFast, obj.imageWidthFast)),1);
+                    frame=frame + reshape(imageData, obj.imageWidthFast, obj.imageHeight);
                     obj.numberOfAcquiredFrames = obj.numberOfAcquiredFrames + 1;
                 end
             end
