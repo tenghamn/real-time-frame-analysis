@@ -14,9 +14,6 @@ classdef TestPlotterSingleAxis<LiveAnalyzer
             colorbar(axis);
             set(axis,'xlim', [1,size(obj.currentFrame,2)]);
             set(axis,'ylim', [1,size(obj.currentFrame,1)]);
-            f = figure;
-            obj.control = uicontrol(f,'Style','popupmenu');
-            obj.control.String = obj.SensingRegions.namesOfAllRegions;
         end
         
         function plotOnSingleAxis(obj,axis)

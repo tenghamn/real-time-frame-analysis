@@ -9,12 +9,12 @@ classdef TestPlotterTripleAxis<LiveAnalyzer
             
         end
         
-        function plot(obj,axis)
-            image(axis,obj.currentFrame,'CDataMapping','scaled');
-            colorbar(axis);
+        function plotOnTripleAxis(obj,mainAxis,bottomAxis,leftAxis)
+            image(mainAxis,obj.currentFrame,'CDataMapping','scaled');
+            colorbar(mainAxis);
         end
         
-        function resetZoom(obj,axis)
+        function resetZoom(obj,mainAxis)
             
         end
     end
